@@ -22,6 +22,8 @@ class ApplicationController < Sinatra::Base
     session[:user_id] = @user.id
 
     redirect '/users/home'
+    
+
   end
 
   get '/sessions/login' do
@@ -31,12 +33,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/sessions' do
+    #when trying to see the params put it right after the do so it can be ran and you can see what the parameters are
     @user = User.find_by(email: params[:email], password: params[:password])
     if @user
       session[:user_id] = @user.id
       redirect '/users/home'
     end
     redirect '/sessions/login'
+
   end
 
   get '/sessions/logout' do
